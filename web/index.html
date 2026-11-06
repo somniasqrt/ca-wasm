@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CA Engine</title>
+    </head>
+    <body>
+        <div id="app">
+            <main class="simulation-container">
+                <canvas id="simulation-canvas"></canvas>
+            </main>
+            <aside class="control-panel">
+                <div class="control-group">
+                    <label>Grid Size (W x H)</label>
+                    <input type="text" id="grid-size" value="100x100" />
+                </div>
+                <hr />
+                <div class="mode-tabs">
+                    <button class="tab-btn active" data-target="tab-ca">
+                        CA
+                    </button>
+                    <button class="tab-btn" data-target="tab-nca">CCA</button>
+                    <button class="tab-btn" data-target="tab-gca">GCA</button>
+                </div>
+                <div class="tab-content">
+          <!-- CA Tab -->
+          <section id="tab-ca" class="tab-pane active">
+            <div class="custom-select" id="ca-preset-select" style="margin-bottom: 15px;">
+              <div class="custom-select-trigger"><span id="ca-preset-label">choose preset...</span> ▾</div>
+              <div class="custom-select-options">
+                  <div class="custom-select-option" data-value="gol">game of life</div>
+                  <div class="custom-select-option" data-value="coral">coral</div>
+                  <div class="custom-select-option" data-value="maze">maze</div>
+              </div>
+            </div>
+            <div class="control-group">
+                            <label>Birth</label>
+                            <input type="text" id="birth-rule" value="3" />
+                        </div>
+                        <div class="control-group">
+                            <label>Survival</label>
+                            <input type="text" id="survival-rule" value="23" />
+                        </div>
+                        <button id="btn-apply-rules" class="btn block">
+                            Apply
+                        </button>
+                    </section>
+                    <section id="tab-nca" class="tab-pane">
+                        <div class="custom-select" id="nca-preset-select" style="margin-bottom: 15px;">
+                          <div class="custom-select-trigger"><span id="nca-preset-label">choose preset...</span> ▾</div>
+                          <div class="custom-select-options">
+                              <div class="custom-select-option" data-value="lenia_r2">lenia r2</div>
+                              <div class="custom-select-option" data-value="lenia_r4">lenia r4</div>
+                              <div class="custom-select-option" data-value="lenia_r8">lenia r8</div>
+                              <div class="custom-select-option" data-value="lenia_r12">lenia r12</div>
+                              <div class="custom-select-option" data-value="bimodal_gaussian">bimodal gaussian</div>
+                              <div class="custom-select-option" data-value="smooth_step">smooth step (gol)</div>
+                              <div class="custom-select-option" data-value="polynomial_bell">polynomial bell</div>
+                              <div class="custom-select-option" data-value="von_neumann">von neumann cross</div>
+                          </div>
+                        </div>
+                        <div
+                            class="control-group"
+                            style="
+                                flex-direction: column;
+                                align-items: stretch;
+                                gap: 8px;
+                            "
+                        >
+                            <label style="align-self: flex-start"
+                                >Convolution Kernel</label
+                            >
+                            <div
+                                class="kernel-grid"
+                                id="dynamic-kernel-grid"
+                                style="width: 100%"
+                            ></div>
+                        </div>
+                        <div
+                            class="control-group"
+                            style="
+                                flex-direction: column;
+                                align-items: stretch;
+                                gap: 10px;
+                            "
+                        >
+                            <div
+                                style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                    width: 100%;
+                                    align-items: center;
+                                "
+                            >
+                                <label>Radius</label>
+                                <div style="display: flex; gap: 10px;">
+
+
+                                    <input
+                                        type="number"
+                                        id="nca-radius"
+                                        value="1"
+                                        min="1"
+                                        max="10"
+                                        style="width: 60px; text-align: center"
+                                    />
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 5px">
+                                <button
+                                    id="btn-sym-x"
+                                    class="btn"
+                                    style="
+                                        flex: 1;
+                                        font-size: 11px;
+                                        padding: 6px;
+                                    "
+                                >
+                                    Sym X
+                                </button>
+                                <button
+                                    id="btn-sym-y"
+                                    class="btn"
+                                    style="
+                                        flex: 1;
+                                        font-size: 11px;
+                                        padding: 6px;
+                                    "
+                                >
+                                    Sym Y
+                                </button>
+                                <button
+                                    id="btn-sym-center"
+                                    class="btn"
+                                    style="
+                                        flex: 1;
+                                        font-size: 11px;
+                                        padding: 6px;
+                                    "
+                                >
+                                    Sym 0,0
+                                </button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Activation function</label>
+                            <input
+                                type="text"
+                                id="nca-func"
+                                value="exp(-((x-mu)**2) / (2*(sigma**2)))"
+                            />
+                        </div>
+                        <div class="control-group">
+                            <label>Mu (μ)</label>
+                            <input type="text" id="nca-mu" value="0.15" />
+                        </div>
+                        <div class="control-group">
+                            <label>Sigma (σ)</label>
+                            <input type="text" id="nca-sigma" value="0.015" />
+                        </div>
+                        <div class="desmos-container">
+                            <canvas
+                                id="desmos-canvas"
+                                width="260"
+                                height="120"
+                            ></canvas>
+                        </div>
+                        <button id="btn-apply-nca" class="btn block">
+                            Apply
+                        </button>
+                        <button id="btn-nca-random" class="btn block" style="margin-top: 10px;">
+                            randomize
+                        </button>
+                    </section>
+                    <section id="tab-gca" class="tab-pane">
+                        <p>GCA parameters</p>
+                    </section>
+                </div>
+                <hr />
+                <div class="playback-controls">
+                    <div class="playback-buttons">
+                        <button id="btn-play" class="btn icon-btn" title="Play">
+                            ▶️
+                        </button>
+                        <button
+                            id="btn-pause"
+                            class="btn icon-btn active"
+                            title="Pause"
+                        >
+                            ⏸️
+                        </button>
+                        <button
+                            id="btn-next"
+                            class="btn icon-btn"
+                            title="Next Generation"
+                        >
+                            ⏭️
+                        </button>
+                    </div>
+                    <div class="slider-group" style="margin-bottom: 10px;">
+                        <label for="brush-slider"
+                            >Brush Size ->
+                            <span id="brush-display">1</span></label
+                        >
+                        <input
+                            type="range"
+                            id="brush-slider"
+                            min="0"
+                            max="30"
+                            value="1"
+                        />
+                    </div>
+                    <div class="slider-group">
+                        <label for="pace-slider"
+                            >Gen per sec ->
+                            <span id="pace-display">10</span></label
+                        >
+                        <input
+                            type="range"
+                            id="pace-slider"
+                            min="1"
+                            max="60"
+                            value="10"
+                        />
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button id="btn-reset" class="btn danger block">
+                        Reset
+                    </button>
+                </div>
+            </aside>
+        </div>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
