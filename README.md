@@ -4,9 +4,14 @@ An interactive cellular automata playground in the browser. The simulation engin
 
 **Live demo:** https://somniasqrt.github.io/ca-wasm/
 
+<p align="center"><img src="docs/orbium.gif" width="360" alt="Orbium gliding"></p>
+<p align="center"><sub>Orbium, a classic Lenia creature (R = 13, mu = 0.15, sigma = 0.015), simulated by this engine.</sub></p>
+
 ## Modes
 
 **Game of Life (CA).** Classic binary automaton with editable Birth/Survival rules, so you can switch from Conway's B3/S23 to any other Life-like rule.
+
+![Game of Life](docs/life.gif)
 
 **Kernel-based continuous CA (CCA).** A Lenia-style automaton with real-valued cell states:
 
@@ -19,6 +24,8 @@ Everything is editable at runtime:
 - the growth function itself, typed as a formula (for example `exp(-((x-mu)^2) / (2*(sigma^2)))`), with a live plot of its shape;
 - parameters mu and sigma;
 - random initial state.
+
+![Continuous CA](docs/continuous.gif)
 
 **GCA.** Placeholder for a future mode.
 
