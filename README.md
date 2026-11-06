@@ -2,6 +2,8 @@
 
 An interactive cellular automata playground in the browser. The simulation engine is written in Rust and compiled to WebAssembly, the UI is plain TypeScript with Vite.
 
+**Live demo:** https://somniasqrt.github.io/ca-wasm/
+
 ## Modes
 
 **Game of Life (CA).** Classic binary automaton with editable Birth/Survival rules, so you can switch from Conway's B3/S23 to any other Life-like rule.
