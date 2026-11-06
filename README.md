@@ -27,6 +27,12 @@ Everything is editable at runtime:
 
 ![Continuous CA](docs/continuous.gif)
 
+<p align="center">
+  <img src="docs/sq-amoeba.gif" width="320" alt="A single drop turning into an amoeba-like blob">
+  <img src="docs/sq-blob.gif" width="320" alt="A blob that keeps boiling inside">
+</p>
+<p align="center"><sub>Left: one soft drop with a large ring kernel (R = 10, mu = 0.15, sigma = 0.02) shrinks into a ring, then spreads like an amoeba. Right: the polynomial bell preset settles into a blob that keeps boiling inside.</sub></p>
+
 **GCA.** Placeholder for a future mode.
 
 ## Controls
